@@ -9,75 +9,44 @@
 <html>
 <head>
     <title>File Upload Page</title>
-    <script src="jquery-3.4.1.min.js"></script>
     <style>
-        body{
-            width: 99%;
-            height: auto;
+        div#box{}
+        div.bar_wrap{
+            width: 80%;
+            height: 5%;
+            margin: 10px auto;
             background-color: #eeeeee;
-            min-height: 550px;
+            border-radius: 50px;
+            padding: 5px 8px;
         }
-        div#box{
-            height: auto;
-            width: auto;
-            margin: 0 auto;
-            min-width: 1000px;
-            max-width: 1500px;
-        }
-        div#top{
-            height: 10%;
-            width: auto;
-            border-radius: 10px;
-            background-color: #149bdf;
+        div.progress_bar{
+            height: 100%;
+            background-color: #00aa00;
+            border-radius: 45px;
+            width: 0;
         }
         div.upload, div.download{
-            padding: 20px 0 10px 0;
-            background-color: #cfcfcf;
-            margin: 10px auto;
+            padding: 10px;
+            background-color: #cccccc;
+            margin: 10px 0;
             width: 45%;
             height: 45%;
+            border-style: dot-dash;
+            border-color: greenyellow;
+            border-width: 5px;
             border-radius: 5px;
         }
         img{
             width: 40%;
-            height: 40%;
             margin: 10px;
         }
-        .title{
+        span.title{
+            margin: 15px;
+            padding: 15px;
             font-size: 18px;
         }
-        .btn{
-            width: 40%;
-            background-color: #4CAF50;
-            color: white;
-            padding: 12px 18px;
-            margin: 25px 0 0 0;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .btn:hover{
-            background-color: #45a049;
-        }
-        .input_button{
-            cursor: pointer;
-        }
-        .bar_wrap{
-            width: 80%;
-            height: 4%;
-            background-color: #dddddd;
-            overflow: hidden;
-            border-radius: 50px;
-            padding: 4px 7px;
-            margin: 0 auto;
-        }
-        .progress_bar{
-            height: 100%;
-            width: 0;
-            border-radius: 40px;
-            background-color: #00aa00;
-        }
     </style>
+    <script src="jquery-3.4.1.min.js"></script>
     <script>
         if(window.XMLHttpRequest){
             var xmlhttp=new XMLHttpRequest();
@@ -106,10 +75,6 @@
                 file = document.getElementById("input_f4").files[0];
                 fileName = "g_file";
             }
-            if (file == null){
-                alert("Please select a file!");
-                return;
-            }
             format = file.name.substring(file.name.lastIndexOf("."));
             fileName = fileName + id + format;
             formData.append("identifier", identifier);
@@ -131,38 +96,40 @@
                 },
                 complete: function () {
                     $.ajax({
-                        url: ("load_uploadFile.jsp?id=" + id),
-                        success: function (data) {
-                            $("#main").html(data);
+                        url: "load_uploadFile.jsp",
+                        data: {id: id},
+                        success: function (resp) {
+                            $("#main").html(resp);
+                            alert("File upload success");
                         }
                     });
                 },
                 xhr: xhrOnProgress(function (e) {
-                    var percent = 100 * (e.loaded / e.total);
-                    $("#bar_" + identifier).css({width: (percent + "%")});
-                    console.log(percent + "%");
+                    var percent = Math.floor(e.loaded / e.total * 100) + "%";
+                    console.log(percent);
+                    $("#bar_"+identifier).css({width: percent});
                 })
             });
         }
     </script>
     <script>
         function del(identifier){
-            if(!confirm("Are you sure to delete this file?")){
-                return;
-            }
+            if (!confirm("Are you sure to delete this file?"))return;
             $.ajax({
                 url: "delete",
                 type: "GET",
-                data: {"id": id, "f_id": identifier},
-                complete: function () {
+                data: {id : id, fId : identifier},
+                success: function () {
                     $.ajax({
-                        url: ("load_uploadFile.jsp?id=" + id),
-                        success: function (data) {
-                            $("#main").html(data);
+                        url: "load_uploadFile.jsp",
+                        type: "GET",
+                        data: {id: id},
+                        success: function (resp) {
+                            $("#main").html(resp);
                         }
                     });
                 }
-            })
+            });
         }
     </script>
     <script>
@@ -181,28 +148,28 @@
     </script>
 </head>
 <body>
+<%!
+    int id;
+%>
+<%
+    id = Integer.parseInt(request.getParameter("id"));
+%>
 <div id="box">
-    <%!
-        int id;
-    %>
-    <%
-        id = Integer.parseInt(request.getParameter("id"));
-    %>
-    <div id="top">
-
+    <div id="top" style="height: 10%">
+        <p>Some tool bars and some titles...</p>
     </div>
     <div id="main" style="text-align: center; width: 50%; height: 80%; margin: auto">
     </div>
-    <script>
-        xmlhttp.onreadystatechange=function () {
-            if(xmlhttp.readyState==4 && xmlhttp.status==200){
-                document.getElementById("main").innerHTML = xmlhttp.responseText;
-            }
-        };
-        var id = <%=id%>;
-        xmlhttp.open("GET", "load_uploadFile.jsp?id="+id,true);
-        xmlhttp.send();
-    </script>
 </div>
+<script>
+    xmlhttp.onreadystatechange=function () {
+        if(xmlhttp.readyState==4 && xmlhttp.status==200){
+            document.getElementById("main").innerHTML = xmlhttp.responseText;
+        }
+    };
+    var id = <%=id%>;
+    xmlhttp.open("GET", "load_uploadFile.jsp?id="+id,true);
+    xmlhttp.send();
+</script>
 </body>
 </html>

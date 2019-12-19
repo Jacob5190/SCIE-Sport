@@ -36,7 +36,7 @@
         padding: 14px 20px;
         margin: 8px 0;
         border: none;
-        border-radius: 5px;
+        border-radius: 4px;
         cursor: pointer;
     }
     input[type=submit]:hover {

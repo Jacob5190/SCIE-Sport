@@ -10,6 +10,21 @@
 <head>
     <title>File Upload Page</title>
     <style>
+        div#box{}
+        div.bar_wrap{
+            width: 80%;
+            height: 5%;
+            margin: 10px auto;
+            background-color: #eeeeee;
+            border-radius: 50px;
+            padding: 5px 8px;
+        }
+        div.progress_bar{
+            height: 100%;
+            background-color: #00aa00;
+            border-radius: 45px;
+            width: 0;
+        }
         div.upload, div.download{
             padding: 10px;
             background-color: #cccccc;
@@ -79,15 +94,55 @@
                 error: function (response) {
                     console.log(response);
                 },
-                /*
-                xhr: function () {
-                    Xhr = $.ajaxSettings.xhr();
-                    if(Xhr.upload){
-                        Xhr.upload.addEventListener("progress", progressHandling, false);
-                    }
-                    return Xhr;
-                }*/
+                complete: function () {
+                    $.ajax({
+                        url: "load_uploadFile.jsp",
+                        data: {id: id},
+                        success: function (resp) {
+                            $("#main").html(resp);
+                            alert("File upload success");
+                        }
+                    });
+                },
+                xhr: xhrOnProgress(function (e) {
+                    var percent = Math.floor(e.loaded / e.total * 100) + "%";
+                    $("#bar_"+identifier).css({width: percent});
+                })
             });
+        }
+    </script>
+    <script>
+        function del(identifier){
+            if (!confirm("Are you sure to delete this file?"))return;
+            $.ajax({
+                url: "delete",
+                type: "GET",
+                data: {id : id, fId : identifier},
+                success: function () {
+                    $.ajax({
+                        url: "load_uploadFile.jsp",
+                        type: "GET",
+                        data: {id: id},
+                        success: function (resp) {
+                            $("#main").html(resp);
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+    <script>
+        var xhrOnProgress=function(fun) {
+            xhrOnProgress.onprogress = fun;
+            return function() {
+                var xhr = $.ajaxSettings.xhr();
+                if (typeof xhrOnProgress.onprogress !== 'function')
+                    return xhr;
+                if (xhrOnProgress.onprogress && xhr.upload) {
+                    xhr.upload.onprogress = xhrOnProgress.onprogress;
+                }
+                return xhr;
+            }
         }
     </script>
 </head>
@@ -98,10 +153,12 @@
 <%
     id = Integer.parseInt(request.getParameter("id"));
 %>
-<div id="top" style="height: 10%">
-    <p>Some tool bars and some titles...</p>
-</div>
-<div id="main" style="text-align: center; width: 50%; height: 80%; margin: auto">
+<div id="box">
+    <div id="top" style="height: 10%">
+        <p>Some tool bars and some titles...</p>
+    </div>
+    <div id="main" style="text-align: center; width: 50%; height: 80%; margin: auto">
+    </div>
 </div>
 <script>
     xmlhttp.onreadystatechange=function () {
