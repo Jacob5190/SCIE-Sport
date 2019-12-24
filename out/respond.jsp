@@ -24,9 +24,9 @@
 <td><%=ddl%></td>
 <td><input type="radio" name="file_select"></td>
 <%
-    url = "jdbc:mysql://127.0.0.1:3306/scie_sport?user=root&serverTimezone=Hongkong";
+    url = "jdbc:mysql://127.0.0.1:3306/SCIESport?user=root&serverTimezone=Hongkong";
     user = "root";
-    password = "admin";
+    password = "Aa*20021122";
     //Format the query statement to inset the data
     String query =
             String.format(
@@ -44,6 +44,6 @@
         stm.executeUpdate(query);
         stm.executeUpdate(query1);
     } catch (SQLException e){
-        e.printStackTrace();
+        out.println(e.getMessage());
     }
 %>

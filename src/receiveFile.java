@@ -5,15 +5,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.io.IOException;
-import java.sql.*;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.Part;
-@WebServlet("/file")
 @MultipartConfig()
 public class receiveFile extends HttpServlet {
-	static final String URL = "jdbc:mysql://127.0.0.1:3306/scie_sport?user=root&serverTimezone=Hongkong";
+	static final String URL = "jdbc:mysql://127.0.0.1:3306/SCIESport?user=root&serverTimezone=Hongkong";
 	static final String USER = "root";
-	static final String PASSWORD = "admin";
+	static final String PASSWORD = "Aa*20021122";
 	static final String SEPARATOR = File.separator;
 	@Override
 	protected void doPost (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -46,17 +44,16 @@ public class receiveFile extends HttpServlet {
 			file.write(directory + SEPARATOR + fName);
 			resp.getWriter().println("File write to: " + directory + SEPARATOR + fName);
 			updateDB(fileId, fName);
-			resp.getWriter().println("Update DB successfully.");
 		}catch (Exception e){
 			resp.getWriter().println(e.getMessage());
 		}
 	}
-	private static void updateDB(String identifier, String fName) throws IOException {
+	private static void updateDB(String identifier, String fName){
 		String fId = fName.substring(fName.lastIndexOf(".") - 1, fName.lastIndexOf("."));
 		String fFormat = fName.substring(fName.lastIndexOf("."));
 		String file = "file_" + identifier;
 		//Format the query statement to inset the data
-		String query = String.format("UPDATE files SET %s = 1, f%s_format = \"%s\" WHERE id = %s", file, identifier, fFormat, fId);
+		String query = String.format("UPDATE files SET %s = 1, f%s_format = \"%s\" WHERE id = %s;", file, identifier, fFormat, fId);
 		DBUtils.updateDB(query);
 	}
 	@Override

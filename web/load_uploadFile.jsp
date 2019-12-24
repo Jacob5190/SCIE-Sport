@@ -14,9 +14,9 @@
 %>
 <%
     id = Integer.parseInt(request.getParameter("id"));
-    url = "jdbc:mysql://127.0.0.1:3306/scie_sport?user=root&serverTimezone=Hongkong";
+    url = "jdbc:mysql://127.0.0.1:3306/SCIESport?user=root&serverTimezone=Hongkong";
     user = "root";
-    password = "admin";
+    password = "Aa*20021122";
     String query = "select * from files where id=" + id;
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
@@ -36,13 +36,13 @@
         f4 = rs.getBoolean("file_4");
         if (f4) f4_format = rs.getString("f4_format");
     } catch (SQLException e){
-        e.printStackTrace();
+        out.println(e.getMessage());
     }
     PrintWriter pw = response.getWriter();
     if(!f1){
     	pw.println("<div id=\"upload_f1\" class=\"upload\" style=\"float: left\" >\n" +
                 "        <span class=\"title\">Report</span><br />\n" +
-                "        <label class=\"input_button\" for=\"input_f1\"><img src=\"resources/shangchuan1.svg\" alt=\"上传\"></label><br />\n" +
+                "        <label class=\"input_button\" for=\"input_f1\"><img src=\"resources/shangchuan1.svg\" alt=\"上传\" ></label><br />\n" +
                 "        <input type=\"file\" id=\"input_f1\" accept=\".docx\" style=\"position:absolute;clip:rect(0 0 0 0);\">\n" +
                 "        <div class=\"bar_wrap\"><div class=\"progress_bar\" id=\"bar_1\"></div></div>\n" +
                 "        <button type=\"button\" id=\"f1_upload_button\" onclick=\"upload(1)\" class=\"btn\">Upload</button>\n" +
@@ -52,7 +52,7 @@
         pw.println("<div id=\"file_f1\" class=\"download\" style=\"float: left\" >\n" +
                 "        <span class=\"title\">Report "+ id +"</span><br />\n" +
                 "        <a href=\"files/report/report" + id + f1_format + "\" id=\"download_f1\">" +
-                "        <img src=\"resources/Shapecopy.svg\" alt=\"文件\"></a><br />\n" +
+                "        <img src=\"resources/Shapecopy.svg\" alt=\"文件\" class=\"file_pic\"></a><br />\n" +
                 "        <button id=\"f1_delete_button\" class=\"btn\" onclick=\"del(1)\">Delete</button>\n" +
                 "    </div>");
     }
@@ -70,7 +70,7 @@
         pw.println("<div id=\"file_f2\" class=\"download\" style=\"float: right\" >\n" +
                 "        <span class=\"title\">Raw video "+ id +"</span><br />\n" +
                 "        <a href=\"files/r_video/r_video" + id + f2_format + "\" id=\"download_f2\">" +
-                "        <img src=\"resources/Shapecopy.svg\" alt=\"文件\"></a><br />\n" +
+                "        <img src=\"resources/Shapecopy.svg\" alt=\"文件\" class=\"file_pic\"></a><br />\n" +
                 "        <button id=\"f2_delete_button\" class=\"btn\" onclick=\"del(2)\">Delete</button>\n" +
                 "    </div>");
     }
@@ -88,7 +88,7 @@
         pw.println("<div id=\"file_f3\" class=\"download\" style=\"float: left\" >\n" +
                 "        <span class=\"title\">Edited video "+ id +"</span><br />\n" +
                 "        <a href=\"files/e_video/e_video" + id + f3_format + "\" id=\"download_f3\">" +
-                "        <img src=\"resources/Shapecopy.svg\" alt=\"文件\"></a><br />\n" +
+                "        <img src=\"resources/Shapecopy.svg\" alt=\"文件\" class=\"file_pic\"></a><br />\n" +
                 "        <button id=\"f3_delete_button\" class=\"btn\" onclick=\"del(3)\">Delete</button>\n" +
                 "    </div>");
     }
@@ -106,7 +106,7 @@
         pw.println("<div id=\"file_f4\" class=\"download\" style=\"float: right\" >\n" +
                 "        <span class=\"title\">GIF file "+ id +"</span><br />\n" +
                 "        <a href=\"files/g_file/g_file" + id + f4_format + "\" id=\"download_f4\">" +
-                "        <img src=\"resources/Shapecopy.svg\" alt=\"文件\"></a><br />\n" +
+                "        <img src=\"resources/Shapecopy.svg\" alt=\"文件\" class=\"file_pic\"></a><br />\n" +
                 "        <button id=\"f4_delete_button\" class=\"btn\" onclick=\"del(4)\">Delete</button>\n" +
                 "    </div>");
     }

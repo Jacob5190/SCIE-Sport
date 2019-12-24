@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ROOT">
+    <output-path>$PROJECT_DIR$/archive</output-path>
+    <root id="archive" name="ROOT.war">
+      <element id="dir-copy" path="$PROJECT_DIR$/web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Sport" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

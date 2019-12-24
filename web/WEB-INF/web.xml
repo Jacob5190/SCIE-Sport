@@ -11,14 +11,14 @@
         <servlet-name>receive</servlet-name>
         <servlet-class>receiveFile</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>delete</servlet-name>
-        <servlet-class>deleteFile</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>receive</servlet-name>
         <url-pattern>/receive</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>delete</servlet-name>
+        <servlet-class>deleteFile</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>delete</servlet-name>
         <url-pattern>/delete</url-pattern>

@@ -13,37 +13,43 @@
     <title>Task Management System</title>
 </head>
 <style>
+    b{
+        font-size: 18px;
+    }
     body{
         font-size: 16px;
         font-family: "Calibri" ,serif;
+        min-width: 1280px;
+        background-color: #222222;
     }
     input[type=text], input[type=date] {
         width: 90%;
         padding: 8px 10px;
         margin: 10px 0;
         display: inline-block;
-        border: 1px solid #ccc;
-        border-radius: 4px;
+        border: 2px solid #ccc;
+        border-radius: 5px;
         box-sizing: border-box;
     }
     input {
-        margin: 10px 0;
+        margin: 10px 3px;
     }
     button {
         width: 90%;
         background-color: #4CAF50;
         color: white;
         padding: 14px 20px;
-        margin: 8px 0;
+        margin: 8px 3px;
         border: none;
-        border-radius: 4px;
+        border-radius: 5px;
         cursor: pointer;
     }
-    input[type=submit]:hover {
-        background-color: #45a049;
+    button:hover {
+        background-color: #46a14a;
     }
     div.upload {
-        width: 200px;
+        margin: 10px;
+        width: 180px;
         border-radius: 5px;
         background-color: #f2f2f2;
         padding: 20px;
@@ -53,10 +59,9 @@
         border-top: 3px dashed;
         color: darkgray;
     }
-    div.radio {
-
-    }
     #ret {
+        margin: 10px;
+        width: auto;
         border-radius: 5px;
         background-color: #f2f2f2;
         padding: 20px;
@@ -67,7 +72,7 @@
         border-collapse: collapse;
     }
     table, tr, th, td{
-        border: 1px solid darkgray;
+        border: 2px solid darkgray;
     }
     td, th{
         font-size: 16px;
@@ -82,6 +87,7 @@
     }
 </style>
 <body>
+<script src="jquery-3.4.1.min.js"></script>
 <script>
     //Initialize Ajax.
     var xmlhttp;
@@ -101,6 +107,9 @@
                 newRow = document.createElement("tr");
                 newRow.innerHTML = xmlhttp.responseText;
                 document.getElementById("table_body").appendChild(newRow);
+                $("#main input").each(function (obj) {
+                    $(this).val("");
+                });
             }
         };
         //Identify the next id to be used.
@@ -119,7 +128,7 @@
         var report = document.getElementById("report").value;
         var ddl = document.getElementById("ddl").value;
         if (title == "" || grade == null || gender == null || photo == "" || report == "" || ddl == ""){
-            alert("Please complete the info.");
+            alert("Please fill in all the info.");
         }
         else {
             var str = "id=" + id + "&title=" + title + "&grade=" + grade
@@ -151,12 +160,16 @@
                 id = row[i].firstElementChild.innerHTML;
             }
         }
+        if(id == null){
+            alert("Please select a task for file upload.");
+            return;
+        }
         window.location.href = "uploadFile.jsp?id="+id;
     }
 
 
 </script>
-<div class="upload">
+<div class="upload" id="main">
     <em><b>Title</b></em><br /><input type="text" id="title"><br /><hr />
     <div class="radio">
         <em><b>AL/GL</b></em><br />
@@ -193,9 +206,9 @@
         <%!int id; String url, user, password, title, grade, gender, photo, report, ddl;%>
         <%
             //initialize links to database
-            url = "jdbc:mysql://127.0.0.1:3306/scie_sport?user=root&serverTimezone=Hongkong";
+            url = "jdbc:mysql://127.0.0.1:3306/SCIESport?user=root&serverTimezone=Hongkong";
             user = "root";
-            password = "admin";
+            password = "Aa*20021122";
             String query = "select * from task;";
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");

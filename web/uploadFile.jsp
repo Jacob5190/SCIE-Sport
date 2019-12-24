@@ -10,13 +10,19 @@
 <head>
     <title>File Upload Page</title>
     <style>
-        div#box{}
+        body{
+            min-height: 550px;
+            background-color: #222222;
+        }
+        div#box{
+            min-width: 1000px;
+        }
         div.bar_wrap{
-            width: 80%;
-            height: 5%;
-            margin: 10px auto;
+            width: 70%;
+            height: 3%;
+            margin: 5px auto;
             background-color: #eeeeee;
-            border-radius: 50px;
+            border-radius: 40px;
             padding: 5px 8px;
         }
         div.progress_bar{
@@ -26,24 +32,42 @@
             width: 0;
         }
         div.upload, div.download{
-            padding: 10px;
+            padding: 10px 0 0 0;
             background-color: #cccccc;
-            margin: 10px 0;
-            width: 45%;
-            height: 45%;
-            border-style: dot-dash;
-            border-color: greenyellow;
-            border-width: 5px;
-            border-radius: 5px;
+            margin: 15px auto;
+            width: 47%;
+            height: 50%;
+            border-radius: 7px;
         }
         img{
             width: 40%;
-            margin: 10px;
+            height: 45%;
+            margin: 10px 0 0 0;
+        }
+        img.file_pic{
+            margin: 15px 0;
+        }
+        .input_button{
+            cursor: pointer;
         }
         span.title{
             margin: 15px;
             padding: 15px;
             font-size: 18px;
+        }
+        .btn{
+            width: 60%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 18px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            bottom: 10px;
+        }
+        .btn:hover{
+            background-color: #45a049;
         }
     </style>
     <script src="jquery-3.4.1.min.js"></script>
@@ -57,7 +81,7 @@
     </script>
     <script>
         function upload(identifier) {
-            var format, fileName, file;
+            var format, fileName, file, upload_status=false;
             var formData = new FormData();
             if(identifier == 1) {
                 file = document.getElementById("input_f1").files[0];
@@ -75,6 +99,10 @@
                 file = document.getElementById("input_f4").files[0];
                 fileName = "g_file";
             }
+            if (file == null){
+                alert("Please select a file.\n(Click on the picture to select files)");
+                return;
+            }
             format = file.name.substring(file.name.lastIndexOf("."));
             fileName = fileName + id + format;
             formData.append("identifier", identifier);
@@ -90,19 +118,25 @@
                 processData: false,
                 success: function (data) {
                     console.log(data);
+                    upload_status = true;
                 },
                 error: function (response) {
                     console.log(response);
+                    upload_status = false;
                 },
                 complete: function () {
-                    $.ajax({
-                        url: "load_uploadFile.jsp",
-                        data: {id: id},
-                        success: function (resp) {
-                            $("#main").html(resp);
-                            alert("File upload success");
-                        }
-                    });
+                    if (upload_status) {
+                        $.ajax({
+                            url: "load_uploadFile.jsp",
+                            data: {id: id},
+                            success: function (resp) {
+                                $("#main").html(resp);
+                                alert("File upload successfully.");
+                            }
+                        });
+                    }else{
+                        alert("An unknown error has occurred during file upload process.");
+                    }
                 },
                 xhr: xhrOnProgress(function (e) {
                     var percent = Math.floor(e.loaded / e.total * 100) + "%";
@@ -125,6 +159,7 @@
                         data: {id: id},
                         success: function (resp) {
                             $("#main").html(resp);
+                            alert("File delete successfully.");
                         }
                     });
                 }
@@ -154,9 +189,6 @@
     id = Integer.parseInt(request.getParameter("id"));
 %>
 <div id="box">
-    <div id="top" style="height: 10%">
-        <p>Some tool bars and some titles...</p>
-    </div>
     <div id="main" style="text-align: center; width: 50%; height: 80%; margin: auto">
     </div>
 </div>

@@ -4,9 +4,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DBUtils {
-	static final String URL = "jdbc:mysql://127.0.0.1:3306/scie_sport?user=root&serverTimezone=Hongkong";
+	static final String URL = "jdbc:mysql://127.0.0.1:3306/SCIESport?user=root&serverTimezone=Hongkong";
 	static final String USER = "root";
-	static final String PASSWORD = "admin";
+	static final String PASSWORD = "Aa*20021122";
 	public static void updateDB(String query){
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
