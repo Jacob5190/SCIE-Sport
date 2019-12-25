@@ -34,9 +34,9 @@
         div.upload, div.download{
             padding: 10px 0 0 0;
             background-color: #cccccc;
-            margin: 15px auto;
+            margin: 10px auto;
             width: 47%;
-            height: 50%;
+            height: 48%;
             border-radius: 7px;
         }
         img{
@@ -108,6 +108,7 @@
             formData.append("identifier", identifier);
             formData.append("fileName", fileName);
             formData.append("file", file);
+            //Handle
             $.ajax({
                 url: "receive",
                 type: "POST",
@@ -189,7 +190,20 @@
     id = Integer.parseInt(request.getParameter("id"));
 %>
 <div id="box">
-    <div id="main" style="text-align: center; width: 50%; height: 80%; margin: auto">
+    <div id="tool_bar" style="height: 5%; width: auto; border-radius: 5px; background-color: #3a87ad; padding: 1% 2%; margin-bottom: 5px">
+        <div id="left" style="float: left; height: 100%; width: auto; margin: auto;">
+            <a href="init.jsp" style="float: left">
+                <img src="resources/return.png" style="margin: 0 auto; height: 100%; width: auto"/>
+            </a>
+            <a href="http://111.230.183.9" style="float: left">
+                <img src="resources/VID2GIF.png" style="margin: 0 0 0 50px; height: 100%; width: auto"/>
+            </a>
+        </div>
+        <div id="right" style="float: right; height: 100%; width: auto; margin: auto">
+            <span id="taskInfo" style="height: 100%; width: auto; margin: auto; float: right; color: #e6e6e6; font-size: 24px">Task ID: <%=id%></span>
+        </div>
+    </div>
+    <div id="main" style="text-align: center; width: 55%; height: 80%; margin: auto">
     </div>
 </div>
 <script>
