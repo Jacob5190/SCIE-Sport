@@ -20,8 +20,8 @@ public class deleteTask extends HttpServlet {
 		if (!PASSWORD.equals(password)){
 			pw.println(1);
 		}else{
-			String query1 = "delete from task where id="+id+";";
-			String query2 = "delete from files where id="+id+";";
+			String query1 = "delete from files where id="+id+";";
+			String query2 = "delete from task where id="+id+";";
 			DBUtils.updateDB(query1);
 			DBUtils.updateDB(query2);
 			pw.println(0);
