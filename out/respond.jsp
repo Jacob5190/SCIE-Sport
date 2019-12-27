@@ -41,6 +41,7 @@
     }
     try(Connection conn = DriverManager.getConnection(url, user, password);){
         Statement stm = conn.createStatement();
+        //Execute query and update the database
         stm.executeUpdate(query);
         stm.executeUpdate(query1);
     } catch (SQLException e){

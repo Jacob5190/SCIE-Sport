@@ -72,6 +72,7 @@
     </style>
     <script src="jquery-3.4.1.min.js"></script>
     <script>
+        //Initialize Ajax
         if(window.XMLHttpRequest){
             var xmlhttp=new XMLHttpRequest();
         }
@@ -80,9 +81,11 @@
         }
     </script>
     <script>
+        //Function that handles upload request
         function upload(identifier) {
             var format, fileName, file, upload_status=false;
             var formData = new FormData();
+            //Identify which file is uploaded
             if(identifier == 1) {
                 file = document.getElementById("input_f1").files[0];
                 fileName = "report";
@@ -99,6 +102,7 @@
                 file = document.getElementById("input_f4").files[0];
                 fileName = "g_file";
             }
+            //Ask the user to select a file
             if (file == null){
                 alert("Please select a file.\n(Click on the picture to select files)");
                 return;
@@ -108,7 +112,7 @@
             formData.append("identifier", identifier);
             formData.append("fileName", fileName);
             formData.append("file", file);
-            //Handle
+            //Upload the file to the upload handling servlet
             $.ajax({
                 url: "receive",
                 type: "POST",
@@ -139,6 +143,7 @@
                         alert("An unknown error has occurred during file upload process.");
                     }
                 },
+                //Progress bar
                 xhr: xhrOnProgress(function (e) {
                     var percent = Math.floor(e.loaded / e.total * 100) + "%";
                     $("#bar_"+identifier).css({width: percent});
@@ -147,6 +152,7 @@
         }
     </script>
     <script>
+        //Function that handles file delete request
         function del(identifier){
             if (!confirm("Are you sure to delete this file?"))return;
             $.ajax({
@@ -168,6 +174,7 @@
         }
     </script>
     <script>
+        //Ancillary function for progress bar
         var xhrOnProgress=function(fun) {
             xhrOnProgress.onprogress = fun;
             return function() {
@@ -187,6 +194,7 @@
     int id;
 %>
 <%
+    //Obtain the task id from request
     id = Integer.parseInt(request.getParameter("id"));
 %>
 <div id="box">
@@ -207,6 +215,7 @@
     </div>
 </div>
 <script>
+    //Load page with information in database
     xmlhttp.onreadystatechange=function () {
         if(xmlhttp.readyState==4 && xmlhttp.status==200){
             document.getElementById("main").innerHTML = xmlhttp.responseText;
