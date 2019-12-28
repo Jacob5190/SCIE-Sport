@@ -125,12 +125,8 @@
                 //If success, reload the table with new data.
                 success: function (responseText) {
                     if (responseText == 0){
-                        $.ajax({
-                            url: "load_task.jsp",
-                            method: "GET",
-                            success: function (responseHTML) {
-                                $("#table_body")[0].innerHTML = responseHTML;
-                            }
+                        $("#table_body").load("load_task.jsp", function () {
+                        checkDDL();
                         });
                     }else {
                         alert("Error occurs");
@@ -140,7 +136,16 @@
             })
         }
     }
-
+    function checkDDL() {
+        var now = new Date();
+        var ddl;
+        $("td[name='ddls']").each(function (){
+            ddl = new Date(Date.parse($(this).text()));
+            if (now > ddl){
+                $(this).css("background-color", "#E34C4C");
+            }
+        })
+    }
     //Obtain the value of the radio buttons.
     function getRadioVal(radioName){
         var val = $("input[name="+radioName+"]:checked").val();
@@ -169,7 +174,9 @@
 </script>
 <script>
     $(function () {
-        $("#table_body").load("load_task.jsp");
+        $("#table_body").load("load_task.jsp", function () {
+            checkDDL();
+        });
     })
 </script>
 <div class="upload" id="main">

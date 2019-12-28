@@ -36,7 +36,7 @@
                 "<td>" + gender + "</td>" +
                 "<td>" + photo + "</td>" +
                 "<td>" + report + "</td>" +
-                "<td>" + ddl + "</td>" +
+                "<td name=\"ddls\">" + ddl + "</td>" +
                 "<td><input type=\"radio\" name=\"file_select\"></td>" +
                 "</tr>"
         );
