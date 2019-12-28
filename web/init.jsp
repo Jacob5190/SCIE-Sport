@@ -9,6 +9,8 @@
 <%@ page import="java.sql.*" %>
 <html lang="en">
 <head>
+    <link rel="icon" href="resources/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon"/>
     <meta charset="UTF-8">
     <title>Task Management System</title>
 </head>

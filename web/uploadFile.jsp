@@ -9,6 +9,8 @@
 <html>
 <head>
     <title>File Upload Page</title>
+    <link rel="icon" href="resources/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon"/>
     <style>
         body{
             min-height: 550px;

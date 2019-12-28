@@ -9,6 +9,8 @@
 <html>
 <head>
     <title>Admin page</title>
+    <link rel="icon" href="resources/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon"/>
 </head>
 <body>
 <div>
