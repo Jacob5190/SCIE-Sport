@@ -89,29 +89,7 @@
 <body>
 <script src="jquery-3.4.1.min.js"></script>
 <script>
-    //Initialize Ajax.
-    var xmlhttp;
-    if(window.XMLHttpRequest){
-        xmlhttp=new XMLHttpRequest();
-    }
-    else{
-        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-
-    //Upload the data onto the server.
     function upload() {
-        xmlhttp.onreadystatechange=function() {
-            if (xmlhttp.readyState==4 && xmlhttp.status==200)
-            {
-                //Returned data is written onto the table.
-                newRow = document.createElement("tr");
-                newRow.innerHTML = xmlhttp.responseText;
-                document.getElementById("table_body").appendChild(newRow);
-                $("#main input").each(function (obj) {
-                    $(this).val("");
-                });
-            }
-        };
         //Identify the next id to be used.
         var id_t = document.getElementById("table_body").lastElementChild;
         var id;
@@ -120,7 +98,7 @@
         }else{
             id = parseInt(id_t.firstElementChild.innerHTML) + 1;
         }
-        //Obtain the data values on the input textfields.
+        //Obtain the data values on the input text fields.
         var title = document.getElementById("title").value;
         var grade = getRadioVal("grade");
         var gender = getRadioVal("gender");
@@ -131,24 +109,46 @@
             alert("Please fill in all the info.");
         }
         else {
-            var str = "id=" + id + "&title=" + title + "&grade=" + grade
-                + "&gender=" + gender + "&photo=" + photo
-                + "&report=" + report + "&ddl=" + ddl;
-            //Use ajax to upload the data onto the server.
-            xmlhttp.open("GET", "respond.jsp?" + str, true);
-            xmlhttp.send();
+            //Upload the data onto the server.
+            $.ajax({
+                url: "createTask",
+                data: {
+                    id : id,
+                    title : title,
+                    grade : grade,
+                    gender : gender,
+                    photo : photo,
+                    report : report,
+                    ddl : ddl
+                },
+                method: "GET",
+                //If success, reload the table with new data.
+                success: function (responseText) {
+                    if (responseText == 0){
+                        $.ajax({
+                            url: "load_task.jsp",
+                            method: "GET",
+                            success: function (responseHTML) {
+                                $("#table_body")[0].innerHTML = responseHTML;
+                            }
+                        });
+                    }else {
+                        alert("Error occurs");
+                    }
+                    $("#info_form")[0].reset();
+                }
+            })
         }
     }
 
     //Obtain the value of the radio buttons.
     function getRadioVal(radioName){
-        var radios = document.getElementsByName(radioName);
-        for (var i = 0; i < radios.length; i++){
-            if (radios[i].checked){
-                return radios[i].value;
-            }
+        var val = $("input[name="+radioName+"]:checked").val();
+        if (val != null && val != ""){
+            return val;
+        }else {
+            return null;
         }
-        return null;
     }
 
     //Go to the file upload page with file id.
@@ -166,10 +166,14 @@
         }
         window.location.href = "uploadFile.jsp?id="+id;
     }
-
-
+</script>
+<script>
+    $(function () {
+        $("#table_body").load("load_task.jsp");
+    })
 </script>
 <div class="upload" id="main">
+    <form id="info_form">
     <em><b>Title</b></em><br /><input type="text" id="title"><br /><hr />
     <div class="radio">
         <em><b>AL/GL</b></em><br />
@@ -179,13 +183,14 @@
     </div>
     <div class="radio">
         <em><b>B/G</b></em><br />
-        BOY <input type="radio" name="gender" value="B"><br />
-        GIRL <input type="radio" name="gender" value="G"><br />
-        N/A <input type="radio" name="gender" value="N/A"><br /><hr />
+        BOY <input type="radio" name="gender" value="B" class="radios"><br />
+        GIRL <input type="radio" name="gender" value="G" class="radios"><br />
+        N/A <input type="radio" name="gender" value="N/A" class="radios"><br /><hr />
     </div>
-    <em><b>Photo</b></em><br /><input type="text" id="photo"><br /><hr />
-    <em><b>Report</b></em><br /><input type="text" id="report"><br /><hr />
-    <em><b>DDL</b></em><br /><input type="date" id="ddl"><br /><hr />
+    <em><b>Photo</b></em><br /><input type="text" id="photo" class="radios"><br /><hr />
+    <em><b>Report</b></em><br /><input type="text" id="report" class="radios"><br /><hr />
+    <em><b>DDL</b></em><br /><input type="date" id="ddl" class="radios"><br /><hr />
+    </form>
     <button onclick="upload()">Submit</button>
 </div>
 <div id="ret">
@@ -203,46 +208,6 @@
             </tr>
         </thead>
         <tbody id="table_body">
-        <%!int id; String url, user, password, title, grade, gender, photo, report, ddl;%>
-        <%
-            //initialize links to database
-            url = "jdbc:mysql://127.0.0.1:3306/SCIESport?user=root&serverTimezone=Hongkong";
-            user = "root";
-            password = "Aa*20021122";
-            String query = "select * from task;";
-            try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-            try(Connection conn = DriverManager.getConnection(url, user, password);){
-                Statement stm = conn.createStatement();
-                ResultSet rs = stm.executeQuery(query);
-                while(rs != null && rs.next()){
-                	id = rs.getInt("id");
-                	title = rs.getString("title");
-                	grade = rs.getString("grade");
-                	gender = rs.getString("gender");
-                	photo = rs.getString("photo");
-                	report = rs.getString("report");
-                	ddl = rs.getString("ddl");
-                	if(title == null) continue;
-                	//Obtain data from database and show the data.
-                	out.println("<tr>");
-                	out.println("<td>"+ id +"</td>");
-                    out.println("<td>"+ title +"</td>");
-                    out.println("<td>"+ grade +"</td>");
-                    out.println("<td>"+ gender +"</td>");
-                    out.println("<td>"+ photo +"</td>");
-                    out.println("<td>"+ report +"</td>");
-                    out.println("<td>"+ ddl +"</td>");
-                    out.println("<td><input type=\"radio\" name=\"file_select\"></td>");
-                    out.println("</tr>");
-                }
-            } catch (SQLException e){
-                e.printStackTrace();
-            }
-        %>
         </tbody>
     </table>
     <button onclick="uploadFile()">Upload Files</button>

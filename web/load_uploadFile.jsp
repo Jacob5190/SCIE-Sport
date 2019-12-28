@@ -1,5 +1,6 @@
 <%@ page import="java.sql.*" %>
-<%@ page import="java.io.PrintWriter" %><%--
+<%@ page import="java.io.PrintWriter" %>
+<%@ page import="Utils.DBUtils" %><%--
   Created by IntelliJ IDEA.
   User: Jacob
   Date: 2019/12/14
@@ -8,36 +9,28 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%!
+    Connection conn;
+    Statement stm;
+    ResultSet rs;
     int id;
-    String url, user, password, f1_format, f2_format, f3_format, f4_format;
+    String f1_format, f2_format, f3_format, f4_format;
     boolean f1, f2, f3, f4;
 %>
 <%
     id = Integer.parseInt(request.getParameter("id"));
-    url = "jdbc:mysql://127.0.0.1:3306/SCIESport?user=root&serverTimezone=Hongkong";
-    user = "root";
-    password = "Aa*20021122";
     String query = "select * from files where id=" + id;
-    try {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-    } catch (ClassNotFoundException e) {
-        e.printStackTrace();
-    }
-    try(Connection conn = DriverManager.getConnection(url, user, password);){
-        Statement stm = conn.createStatement();
-        ResultSet rs = stm.executeQuery(query);
-        rs.next();
-        f1 = rs.getBoolean("file_1");
-        if (f1) f1_format = rs.getString("f1_format");
-        f2 = rs.getBoolean("file_2");
-        if (f2) f2_format = rs.getString("f2_format");
-        f3 = rs.getBoolean("file_3");
-        if (f3) f3_format = rs.getString("f3_format");
-        f4 = rs.getBoolean("file_4");
-        if (f4) f4_format = rs.getString("f4_format");
-    } catch (SQLException e){
-        out.println(e.getMessage());
-    }
+    conn = DBUtils.getConn();
+    stm = conn.createStatement();
+    rs = stm.executeQuery(query);
+    rs.next();
+    f1 = rs.getBoolean("file_1");
+    if (f1) f1_format = rs.getString("f1_format");
+    f2 = rs.getBoolean("file_2");
+    if (f2) f2_format = rs.getString("f2_format");
+    f3 = rs.getBoolean("file_3");
+    if (f3) f3_format = rs.getString("f3_format");
+    f4 = rs.getBoolean("file_4");
+    if (f4) f4_format = rs.getString("f4_format");
     PrintWriter pw = response.getWriter();
     if(!f1){
     	pw.println("<div id=\"upload_f1\" class=\"upload\" style=\"float: left\" >\n" +

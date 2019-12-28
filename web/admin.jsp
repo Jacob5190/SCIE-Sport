@@ -1,6 +1,4 @@
-<%@ page import="java.sql.*" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.Iterator" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: Jacob
   Date: 2019/12/26

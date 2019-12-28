@@ -31,4 +31,12 @@
         <servlet-name>adminDelete</servlet-name>
         <url-pattern>/admin</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>createTask</servlet-name>
+        <servlet-class>createTask</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>createTask</servlet-name>
+        <url-pattern>/createTask</url-pattern>
+    </servlet-mapping>
 </web-app>
