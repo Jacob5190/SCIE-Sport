@@ -145,9 +145,12 @@
             ddl = new Date(Date.parse($(this).text()));
             if (now > ddl){
                 $(this).css("background-color", "#E34C4C");
+            } else if(parseInt(Math.abs(ddl - now) / 1000 / 60 / 60 /24) < 3){
+                $(this).css("background-color", "#FFC31F");
             }
         })
     }
+
     //Obtain the value of the radio buttons.
     function getRadioVal(radioName){
         var val = $("input[name="+radioName+"]:checked").val();
@@ -196,9 +199,9 @@
         GIRL <input type="radio" name="gender" value="G" class="radios"><br />
         N/A <input type="radio" name="gender" value="N/A" class="radios"><br /><hr />
     </div>
-    <em><b>Photo</b></em><br /><input type="text" id="photo" class="radios"><br /><hr />
-    <em><b>Report</b></em><br /><input type="text" id="report" class="radios"><br /><hr />
-    <em><b>DDL</b></em><br /><input type="date" id="ddl" class="radios"><br /><hr />
+    <em><b>Photographer</b></em><br /><input type="text" id="photo" class="radios"><br /><hr />
+    <em><b>Reporter</b></em><br /><input type="text" id="report" class="radios"><br /><hr />
+    <em><b>Deadline</b></em><br /><input type="date" id="ddl" class="radios"><br /><hr />
     </form>
     <button onclick="upload()">Submit</button>
 </div>
@@ -210,9 +213,9 @@
                 <th>Title</th>
                 <th>Grade</th>
                 <th>Gender</th>
-                <th>Photo</th>
-                <th>Report</th>
-                <th>DDL</th>
+                <th>Photographer</th>
+                <th>Reporter</th>
+                <th>Deadline</th>
                 <th>Select</th>
             </tr>
         </thead>
