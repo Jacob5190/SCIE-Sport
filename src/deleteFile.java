@@ -14,6 +14,7 @@ public class deleteFile extends HttpServlet {
 	}
 	private static void updateDB(String id, String fId){
 		String query = String.format("UPDATE files SET file_%s = 0, f%s_format = null WHERE id = %s;", fId, fId, id);
+		//Delete file data in database.
 		DBUtils.updateDB(query);
 	}
 }

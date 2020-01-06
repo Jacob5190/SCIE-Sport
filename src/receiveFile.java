@@ -19,6 +19,7 @@ public class receiveFile extends HttpServlet {
 		String fileId = new BufferedReader(new InputStreamReader(identifier.getInputStream())).readLine();
 		String fName = new BufferedReader(new InputStreamReader(fileName.getInputStream())).readLine();
 		String directory = req.getSession().getServletContext().getRealPath("/files");
+		//Check which file is uploaded.
 		switch (fileId) {
 			case "1":
 				directory = directory + SEPARATOR + "report";
@@ -36,6 +37,7 @@ public class receiveFile extends HttpServlet {
 				directory = "NULL";
 				break;
 		}
+		//Create file path if the file does not exist.
 		new File(directory).mkdirs();
 		new File(directory + SEPARATOR +  fName).createNewFile();
 		try {
@@ -46,16 +48,12 @@ public class receiveFile extends HttpServlet {
 			resp.getWriter().println(e.getMessage());
 		}
 	}
-	private static void updateDB(String identifier, String fName){
+	private static void updateDB(String identifier, String fName) {
 		String fId = fName.substring(fName.lastIndexOf(".") - 1, fName.lastIndexOf("."));
 		String fFormat = fName.substring(fName.lastIndexOf("."));
 		String file = "file_" + identifier;
-		//Format the query statement to inset the data
+		//Format the query statement to inset the data into database.
 		String query = String.format("UPDATE files SET %s = 1, f%s_format = \"%s\" WHERE id = %s;", file, identifier, fFormat, fId);
 		DBUtils.updateDB(query);
-	}
-	@Override
-	protected void doGet (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doPost(req, resp);
 	}
 }

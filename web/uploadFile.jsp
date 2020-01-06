@@ -74,15 +74,6 @@
     </style>
     <script src="jquery-3.4.1.min.js"></script>
     <script>
-        //Initialize Ajax
-        if(window.XMLHttpRequest){
-            var xmlhttp=new XMLHttpRequest();
-        }
-        else{
-            var xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-    </script>
-    <script>
         //Function that handles upload request
         function upload(identifier) {
             var format, fileName, file, upload_status=false;
@@ -196,7 +187,7 @@
     int id;
 %>
 <%
-    //Obtain the task id from request
+    //Obtain the task id from request.
     id = Integer.parseInt(request.getParameter("id"));
 %>
 <div id="box">
@@ -218,14 +209,14 @@
 </div>
 <script>
     //Load page with information in database
-    xmlhttp.onreadystatechange=function () {
-        if(xmlhttp.readyState==4 && xmlhttp.status==200){
-            document.getElementById("main").innerHTML = xmlhttp.responseText;
+    $.ajax({
+        url: "load_uploadFile.jsp",
+        method: "GET",
+        data: {id: <%=id%>},
+        success: function (responseText) {
+            document.getElementById("main").innerHTML = responseText;
         }
-    };
-    var id = <%=id%>;
-    xmlhttp.open("GET", "load_uploadFile.jsp?id="+id,true);
-    xmlhttp.send();
+    });
 </script>
 </body>
 </html>

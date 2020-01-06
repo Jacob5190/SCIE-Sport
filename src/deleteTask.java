@@ -24,6 +24,7 @@ public class deleteTask extends HttpServlet {
 		}else{
 			String query1 = "delete from files where id="+id+";";
 			String query2 = "delete from task where id="+id+";";
+			//Update database and delete the task.
 			DBUtils.updateDB(query1);
 			DBUtils.updateDB(query2);
 			pw.println(0);

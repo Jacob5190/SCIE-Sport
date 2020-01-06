@@ -19,6 +19,7 @@
     conn = DBUtils.getConn();
     stm = conn.createStatement();
     rs = stm.executeQuery(query);
+    //Obtain every available id in the database and print out as an option in <select>.
     if (rs != null) {
         while (rs.next()) {
             val = rs.getString("id");

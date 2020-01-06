@@ -20,6 +20,7 @@
     conn = DBUtils.getConn();
     stm = conn.createStatement();
     rs = stm.executeQuery(query);
+    //Obtain every data record of task in the database and format it into table cells.
     while (rs.next()){
         id = rs.getString("id");
         title = rs.getString("title");

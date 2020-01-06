@@ -23,6 +23,8 @@ public class createTask extends HttpServlet {
 				"values(%d, \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\");",
 				id, title, grade, gender, photo, report, ddl);
 		query2 = "insert into files(id) values(" + id + ");";
+		//Create new task info in the database.
+		//Create corresponding empty file data in database.
 		DBUtils.updateDB(query1);
 		DBUtils.updateDB(query2);
 		resp.getWriter().println(0);

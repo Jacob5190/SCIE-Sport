@@ -138,6 +138,7 @@
             })
         }
     }
+    //Check if the deadline is reached and change the color of the corresponding table cells.
     function checkDDL() {
         var now = new Date();
         var ddl;
@@ -178,6 +179,7 @@
     }
 </script>
 <script>
+    //Load the page while checking the deadlines.
     $(function () {
         $("#table_body").load("load_task.jsp", function () {
             checkDDL();
