@@ -6,6 +6,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%!
+    int id;
+%>
+<%
+    //Obtain the task id from request.
+    id = Integer.parseInt(request.getParameter("id"));
+%>
 <html>
 <head>
     <title>File Upload Page</title>
@@ -101,7 +108,7 @@
                 return;
             }
             format = file.name.substring(file.name.lastIndexOf("."));
-            fileName = fileName + id + format;
+            fileName = fileName + <%=id%> + format;
             formData.append("identifier", identifier);
             formData.append("fileName", fileName);
             formData.append("file", file);
@@ -126,7 +133,7 @@
                     if (upload_status) {
                         $.ajax({
                             url: "load_uploadFile.jsp",
-                            data: {id: id},
+                            data: {id: <%=id%>},
                             success: function (resp) {
                                 $("#main").html(resp);
                                 alert("File upload successfully.");
@@ -151,12 +158,12 @@
             $.ajax({
                 url: "delete",
                 type: "GET",
-                data: {id : id, fId : identifier},
+                data: {id : <%=id%>, fId : identifier},
                 success: function () {
                     $.ajax({
                         url: "load_uploadFile.jsp",
                         type: "GET",
-                        data: {id: id},
+                        data: {id: <%=id%>},
                         success: function (resp) {
                             $("#main").html(resp);
                             alert("File delete successfully.");
@@ -183,13 +190,6 @@
     </script>
 </head>
 <body>
-<%!
-    int id;
-%>
-<%
-    //Obtain the task id from request.
-    id = Integer.parseInt(request.getParameter("id"));
-%>
 <div id="box">
     <div id="tool_bar" style="height: 5%; width: auto; border-radius: 5px; background-color: #3a87ad; padding: 1% 2%; margin-bottom: 5px">
         <div id="left" style="float: left; height: 100%; width: auto; margin: auto;">

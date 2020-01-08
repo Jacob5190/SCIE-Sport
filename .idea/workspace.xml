@@ -6,10 +6,12 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1592f22-179c-45e6-a47c-ac19cbb6755e" name="Default Changelist" comment="">
+    <list default="true" id="a1592f22-179c-45e6-a47c-ac19cbb6755e" name="Default Changelist" comment="Small fixes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/deleteTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/deleteTask.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/production/Sport/deleteFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/production/Sport/deleteFile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/production/Sport/receiveFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/production/Sport/receiveFile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/init.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/init.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/uploadFile.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/uploadFile.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -357,7 +359,9 @@
       <workItem from="1578268820059" duration="1546000" />
       <workItem from="1578271937479" duration="69000" />
       <workItem from="1578272031397" duration="242000" />
-      <workItem from="1578288941353" duration="1510000" />
+      <workItem from="1578288941353" duration="3356000" />
+      <workItem from="1578383324966" duration="2000000" />
+      <workItem from="1578450813542" duration="447000" />
     </task>
     <task id="LOCAL-00001" summary="Update1">
       <created>1576739470425</created>
@@ -436,7 +440,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578270308258</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Small fixes">
+      <created>1578290634953</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1578290634953</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -451,7 +462,8 @@
     <MESSAGE value="Set favicon" />
     <MESSAGE value="Add deadline alert before 3 days" />
     <MESSAGE value="Add annotation&#10;Change all original ajax to jQuery ajax" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add annotation&#10;Change all original ajax to jQuery ajax" />
+    <MESSAGE value="Small fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Small fixes" />
   </component>
   <component name="WindowStateProjectService">
     <state x="361" y="70" key="#Project_Structure" timestamp="1576742415593">
@@ -482,10 +494,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="449" y="138" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1536.824@0.0.1536.824" timestamp="1576651545811" />
-    <state x="370" y="0" key="CommitChangelistDialog2" timestamp="1578270306990">
+    <state x="370" y="0" key="CommitChangelistDialog2" timestamp="1578383768761">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="370" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1578270306990" />
+    <state x="370" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1578383768761" />
     <state x="-9" y="62" key="DiffContextDialog" timestamp="1577189682471">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -582,14 +594,14 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="218" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1578272009653" />
-    <state x="361" y="141" key="Vcs.Push.Dialog.v2" timestamp="1578270311028">
+    <state x="361" y="141" key="Vcs.Push.Dialog.v2" timestamp="1578290638572">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="141" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1578270311028" />
-    <state x="449" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1578288941362">
+    <state x="361" y="141" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1578290638572" />
+    <state x="449" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1578451284352">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="449" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1578288941362" />
+    <state x="449" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1578451284352" />
     <state x="339" y="57" key="com.intellij.javaee.view.ServerArtifactsDialog" timestamp="1576455044681">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -610,9 +622,9 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1576593934347" />
-    <state x="425" y="66" width="672" height="676" key="search.everywhere.popup" timestamp="1578272093556">
+    <state x="425" y="66" width="672" height="676" key="search.everywhere.popup" timestamp="1578385260546">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="425" y="66" width="672" height="676" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1578272093556" />
+    <state x="425" y="66" width="672" height="676" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1578385260546" />
   </component>
 </project>

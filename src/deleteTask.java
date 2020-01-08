@@ -7,13 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class deleteTask extends HttpServlet {
-	static String PASSWORD;
-
-	@Override
-	public void init (){
-		PASSWORD = "administrator";
-	}
-
+	static String PASSWORD = "administrator";
 	@Override
 	protected void doGet (HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		String password = req.getParameter("PW");

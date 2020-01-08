@@ -82,6 +82,7 @@
         height: 40px;
         width: 100px;
         padding: 3px 10px;
+        white-space: nowrap;
     }
     th{
         text-align: center;
