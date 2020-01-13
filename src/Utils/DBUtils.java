@@ -10,14 +10,10 @@ public class DBUtils {
 	//Function which execute the database update command from query.
 	public static void updateDB(String query){
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		try(Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);){
+			Connection conn = getConn();
 			Statement stm = conn.createStatement();
 			stm.executeUpdate(query);
-		} catch (SQLException e){
+		}catch (SQLException e){
 			e.printStackTrace();
 		}
 	}

@@ -129,7 +129,7 @@
                 success: function (responseText) {
                     if (responseText == 0){
                         $("#table_body").load("load_task.jsp", function () {
-                        checkDDL();
+                            checkDDL();
                         });
                     }else {
                         alert("Error occurs");
