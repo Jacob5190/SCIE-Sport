@@ -6,7 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.sql.*" %>
 <html lang="en">
 <head>
     <link rel="icon" href="resources/favicon.ico" type="image/x-icon" />
@@ -109,7 +108,7 @@
         var report = document.getElementById("report").value;
         var ddl = document.getElementById("ddl").value;
         if (title == "" || grade == null || gender == null || photo == "" || report == "" || ddl == ""){
-            alert("Please fill in all the info.");
+            alert("Please complete the table.");
         }
         else {
             //Upload the data onto the server.

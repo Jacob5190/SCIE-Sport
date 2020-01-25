@@ -1,6 +1,6 @@
-<%@ page import="java.sql.ResultSet" %>
 <%@ page import="Utils.DBUtils" %>
 <%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.ResultSet" %>
 <%@ page import="java.sql.Statement" %><%--
   Created by IntelliJ IDEA.
   User: Jacob
@@ -31,7 +31,7 @@
         ddl = rs.getString("ddl");
         out.println(
         		"<tr>" +
-        		"<td>" + id + "</td>" +
+        		"<td scope=\"row\">" + id + "</td>" +
                 "<td>" + title + "</td>" +
                 "<td>" + grade + "</td>" +
                 "<td>" + gender + "</td>" +

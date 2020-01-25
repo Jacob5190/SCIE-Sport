@@ -1,11 +1,14 @@
 package Utils;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DBUtils {
-	static final String URL = "jdbc:mysql://127.0.0.1:3306/SCIESport?user=root&serverTimezone=Hongkong";
+	static final String URL = "jdbc:mysql://127.0.0.1:3306/SCIE_Sport?user=root&serverTimezone=Hongkong";
 	static final String USER = "root";
-	static final String PASSWORD = "Aa*20021122";
+	static final String PASSWORD = "admin";
 
 	//Function which execute the database update command from query.
 	public static void updateDB(String query){

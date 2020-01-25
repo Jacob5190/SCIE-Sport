@@ -5,7 +5,7 @@
 		  http://java.sun.com/xml/ns/javaee/web-app_4_0.xsd"
            version="4.0">
     <welcome-file-list>
-        <welcome-file>init.jsp</welcome-file>
+        <welcome-file>task_management.jsp</welcome-file>
     </welcome-file-list>
     <servlet>
         <servlet-name>receive</servlet-name>
